@@ -59,7 +59,12 @@ public class AddressBook {
 	}
 
 	// Method to find a contact via name in the address book arraylist
-	public int findContact(String firstName) {
+	public int findContact() {
+
+		Scanner scan = new Scanner(System.in);
+
+		System.out.print(" Please enter the first name: ");
+		String firstName = scan.next();
 
 		for (Contact contact : addressBook) {
 			if (firstName.compareToIgnoreCase(contact.getFirstName()) == 0) {
@@ -71,20 +76,30 @@ public class AddressBook {
 
 	}
 
+	public void deleteContact() {
+
+		int index = findContact();
+		
+		if (index == -1) {
+			System.out.println(" ERROR: No such contact");
+			return;
+		}
+		
+		addressBook.remove(index);
+		System.out.println(" Contact deleted!");
+
+	}
+
 	public void editContact() {
 
-		Scanner scan = new Scanner(System.in);
-		
-		System.out.print(" Please enter the first name: ");
-		String firstName = scan.next();
-
-		int index = findContact(firstName);
+		int index = findContact();
 
 		if (index == -1) {
 			System.out.println(" ERROR: No such contact");
 			return;
 		}
 
+		System.out.println(" Contact found! Please enter new details of the contact");
 		addressBook.set(index, inputDetails());
 
 	}
