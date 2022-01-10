@@ -1,6 +1,7 @@
 package com.addressbook.services;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import com.addressbook.entities.Contact;
@@ -8,8 +9,8 @@ import com.addressbook.entities.Contact;
 public class AddressBook {
 
 	// Arraylist of contact class type. This is the addressbook
-	public static ArrayList<Contact> addressBook = new ArrayList<Contact>();
-	
+	public ArrayList<Contact> addressBook = new ArrayList<Contact>();
+
 	Scanner scan = new Scanner(System.in);
 
 	// Read all the value of contact and create an object and return said object
@@ -47,7 +48,7 @@ public class AddressBook {
 
 	}
 
-	// Display all the contacts in the address book arraylist 
+	// Display all the contacts in the address book arraylist
 	public void displayContacts() {
 
 		for (Contact contact : addressBook) {
@@ -55,12 +56,12 @@ public class AddressBook {
 		}
 	}
 
-	// Method to create an object of Contact class with user input
+	// Method to add objects of Contact class to address book arraylist
 	public void addContact() {
 
 		System.out.println(" Please enter how many contacts you want to add: ");
 		int n = scan.nextInt();
-		
+
 		for (int i = 0; i < n; i++) {
 			addressBook.add(inputDetails());
 			System.out.println();
@@ -84,23 +85,26 @@ public class AddressBook {
 
 	}
 
-	/*Method to delete contact. We search for the contact by name and then delete 
-	the resp. contact from the arraylist*/
+	/*
+	 * Method to delete contact. We search for the contact by name and then delete
+	 * the resp. contact from the arraylist
+	 */
 	public void deleteContact() {
 
 		int index = findContact();
-		
+
 		if (index == -1) {
 			System.out.println(" ERROR: No such contact");
 			return;
 		}
-		
+
 		addressBook.remove(index);
 		System.out.println(" Contact deleted!");
 
 	}
 
-	// Method to edit contacts. We read all the parameters for that contact and then set into the array list
+	// Method to edit contacts. We read all the parameters for that contact and then
+	// set into the array list
 	public void editContact() {
 
 		int index = findContact();

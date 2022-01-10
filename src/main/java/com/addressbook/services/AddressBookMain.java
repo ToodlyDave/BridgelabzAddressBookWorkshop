@@ -9,7 +9,7 @@ public class AddressBookMain {
 
 		Scanner scan = new Scanner(System.in);
 
-		AddressBook adBook = new AddressBook();
+		AddressBookHandler adBook = new AddressBookHandler();
 
 		// The choice is stored in this variable
 		String ch;
@@ -17,27 +17,45 @@ public class AddressBookMain {
 		// This will display the menu in a loop until the user stops it
 		while (true) {
 			System.out.println(" ---- MENU ----");
-			System.out.println(" 1. Add contacts\n 2. Display contacts\n 3. Edit contacts\n 4. Delete contact\n 5. Exit");
+			System.out.println(" 1. Add contacts\n 2. Display contacts\n 3. Edit contacts\n 4. Delete contact\n"
+					+ " 5. Add address book\n 6. Exit");
 			System.out.print("\n Please enter your choice: ");
 
 			ch = scan.next();
 
 			switch (ch) {
+			
+			// Add new contact(s) to the address book arraylist
 			case "1":
 				adBook.addContact();
 				break;
+				
+			// Display all the contacts stored in the address book arraylist
 			case "2":
 				adBook.displayContacts();
 				break;
+				
+			// Edit a contact in the address book
 			case "3":
 				adBook.editContact();
 				break;
+				
+			// Delete a contact from the address book
 			case "4":
 				adBook.deleteContact();
 				break;
+				
+			// Add a new address book to the list
 			case "5":
+				adBook.addAddressBook();
+				break;
+				
+			// Exit the program
+			case "6":
 				System.out.println(" Good bye!");
 				return;
+				
+			// This is in case the user enters an invalid choice
 			default:
 				System.out.println(" Please enter a valid choice: ");
 			}
