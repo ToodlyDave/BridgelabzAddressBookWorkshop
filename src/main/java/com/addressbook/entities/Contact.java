@@ -11,6 +11,7 @@ public class Contact {
 	long phone;
 	String email;
 
+	// Parameterized class for creating object
 	public Contact(String firstName, String lastName, String address, String city, String state, int zip, long phone,
 			String email) {
 		super();

@@ -6,6 +6,7 @@ import com.addressbook.entities.Contact;
 
 public class AddressBook {
 
+	// Method to create an object of Contact class with user input 
 	public void addContact() {
 		
 		Scanner scan = new Scanner(System.in);
@@ -34,6 +35,7 @@ public class AddressBook {
 		System.out.print(" Please enter the email: ");
 		String email = scan.next();
 		
+		// Creating a new object of the contact class with the parameter values filled by user
 		Contact contact = new Contact(firstName, lastName, address, city, state, zip, phone, email);
 		
 		
