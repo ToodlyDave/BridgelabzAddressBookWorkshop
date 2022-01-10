@@ -8,7 +8,7 @@ public class Contact {
 	String city;
 	String state;
 	int zip;
-	int phone;
+	long phone;
 	String email;
 
 }
