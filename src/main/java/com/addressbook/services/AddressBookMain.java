@@ -11,7 +11,10 @@ public class AddressBookMain {
 
 		AddressBook adBook = new AddressBook();
 
+		// The choice is stored in this variable
 		String ch;
+		
+		// This will display the menu in a loop until the user stops it
 		while (true) {
 			System.out.println(" ---- MENU ----");
 			System.out.println(" 1. Add contacts\n 2. Display contacts\n 3. Edit contacts\n 4. Delete contact\n 5. Exit");
