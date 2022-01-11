@@ -1,15 +1,14 @@
 package com.addressbook.services;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Scanner;
 
 import com.addressbook.entities.Contact;
 
 public class AddressBook {
 
-	// Arraylist of contact class type. This is the addressbook
-	public ArrayList<Contact> addressBook = new ArrayList<Contact>();
+	// Hashset of contact class type. This is the addressbook
+	public HashSet<Contact> addressBook = new HashSet<Contact>();
 
 	Scanner scan = new Scanner(System.in);
 
@@ -63,25 +62,33 @@ public class AddressBook {
 		int n = scan.nextInt();
 
 		for (int i = 0; i < n; i++) {
-			addressBook.add(inputDetails());
+			
+			Contact newContact = inputDetails();
+			
+			if (!addressBook.add(newContact)) {
+				System.out.println(" ERROR: A contact of this name already exists!");
+				i--;
+				continue;
+			}
+			
 			System.out.println();
 		}
 
 	}
 
 	// Method to find a contact via name in the address book arraylist
-	public int findContact() {
+	public Contact findContact() {
 
 		System.out.print(" Please enter the first name: ");
 		String firstName = scan.next();
 
 		for (Contact contact : addressBook) {
 			if (firstName.compareToIgnoreCase(contact.getFirstName()) == 0) {
-				return addressBook.indexOf(contact);
+				return contact;
 			}
 		}
 
-		return -1;
+		return null;
 
 	}
 
@@ -91,14 +98,14 @@ public class AddressBook {
 	 */
 	public void deleteContact() {
 
-		int index = findContact();
+		Contact contact = findContact();
 
-		if (index == -1) {
+		if (contact == null) {
 			System.out.println(" ERROR: No such contact");
 			return;
 		}
 
-		addressBook.remove(index);
+		addressBook.remove(contact);
 		System.out.println(" Contact deleted!");
 
 	}
@@ -107,15 +114,17 @@ public class AddressBook {
 	// set into the array list
 	public void editContact() {
 
-		int index = findContact();
+		Contact contact = findContact();
 
-		if (index == -1) {
+		if (contact == null) {
 			System.out.println(" ERROR: No such contact");
 			return;
 		}
 
 		System.out.println(" Contact found! Please enter new details of the contact");
-		addressBook.set(index, inputDetails());
+		addressBook.remove(contact);
+		addressBook.add(inputDetails());
+//		addressBook.set(index, inputDetails());
 
 	}
 
