@@ -28,7 +28,7 @@ public class AddressBookHandler {
 	// are unique
 	public void addAddressBook() {
 
-		System.out.println(" Please enter the name of the address book: ");
+		System.out.print(" Please enter the name of the address book: ");
 		String name = scan.next();
 
 		if (addressBookRegistry.get(name) != null) {
@@ -44,11 +44,11 @@ public class AddressBookHandler {
 	// Method to call the add contact method in the address book class
 	public void addContact() {
 
-		System.out.println(" Please enter the name of the address book: ");
+		System.out.print(" Please enter the name of the address book: ");
 		String name = scan.next();
 
 		AddressBook adBook = findAddressBook(name);
-		
+
 		if (adBook == null) {
 			System.out.println(" ERROR: An address book of this name does not exist");
 			return;
@@ -61,11 +61,11 @@ public class AddressBookHandler {
 	// Method to call the edit contact method in the address book class
 	public void editContact() {
 
-		System.out.println(" Please enter the name of the address book: ");
+		System.out.print(" Please enter the name of the address book: ");
 		String name = scan.next();
 
 		AddressBook adBook = findAddressBook(name);
-		
+
 		if (adBook == null) {
 			System.out.println(" ERROR: An address book of this name does not exist");
 			return;
@@ -78,11 +78,11 @@ public class AddressBookHandler {
 	// Method to call the delete contact method in the address book class
 	public void deleteContact() {
 
-		System.out.println(" Please enter the name of the address book: ");
+		System.out.print(" Please enter the name of the address book: ");
 		String name = scan.next();
 
 		AddressBook adBook = findAddressBook(name);
-		
+
 		if (adBook == null) {
 			System.out.println(" ERROR: An address book of this name does not exist");
 			return;
@@ -95,11 +95,11 @@ public class AddressBookHandler {
 	// Method to display contacts in address book
 	public void displayContacts() {
 
-		System.out.println(" Please enter the name of the address book: ");
+		System.out.print(" Please enter the name of the address book: ");
 		String name = scan.next();
 
 		AddressBook adBook = findAddressBook(name);
-		
+
 		if (adBook == null) {
 			System.out.println(" ERROR: An address book of this name does not exist");
 			return;
@@ -107,6 +107,22 @@ public class AddressBookHandler {
 
 		adBook.displayContacts();
 
+	}
+
+	// Method to search all the addressbooks for a person in the corresponding city
+	// or state
+	public void searchCityState(String name, String location, String choice) {
+
+		addressBookRegistry.values().stream().forEach((adBook) -> {
+			adBook.addressBook.stream().filter(contact -> {
+
+				if (choice.equalsIgnoreCase("city"))
+					return contact.getCity().equalsIgnoreCase(location);
+				else
+					return contact.getState().equalsIgnoreCase(location);
+			}).filter(contact -> contact.getFirstName().equalsIgnoreCase(name))
+					.forEach(contact -> System.out.println(contact));
+		});
 	}
 
 }

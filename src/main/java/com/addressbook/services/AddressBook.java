@@ -58,19 +58,22 @@ public class AddressBook {
 	// Method to add objects of Contact class to address book arraylist
 	public void addContact() {
 
-		System.out.println(" Please enter how many contacts you want to add: ");
+		System.out.print(" Please enter how many contacts you want to add: ");
 		int n = scan.nextInt();
 
 		for (int i = 0; i < n; i++) {
-			
+
 			Contact newContact = inputDetails();
-			
+
+			// If the add method returns false it means that there is a contacts of this
+			// name already.
+			// Since we used a hash set it'll only allow unique values to be inserted.
 			if (!addressBook.add(newContact)) {
 				System.out.println(" ERROR: A contact of this name already exists!");
 				i--;
 				continue;
 			}
-			
+
 			System.out.println();
 		}
 

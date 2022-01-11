@@ -35,6 +35,22 @@ public class Contact {
 		this.firstName = firstName;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
 		return "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
@@ -57,7 +73,5 @@ public class Contact {
 		Contact other = (Contact) obj;
 		return Objects.equals(firstName, other.firstName);
 	}
-	
-	
 
 }
