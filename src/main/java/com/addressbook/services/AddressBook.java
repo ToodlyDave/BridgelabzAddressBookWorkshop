@@ -1,5 +1,7 @@
 package com.addressbook.services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -9,6 +11,12 @@ public class AddressBook {
 
 	// Hashset of contact class type. This is the addressbook
 	public HashSet<Contact> addressBook = new HashSet<Contact>();
+	
+	// Hashmap of contacts and their states
+	public HashMap<String, ArrayList<Contact>> stateContactMap = new HashMap<>();
+	
+	// Hashmap of contacts and their cities
+	public HashMap<String, ArrayList<Contact>> cityContactMap = new HashMap<>();
 
 	Scanner scan = new Scanner(System.in);
 
@@ -69,10 +77,18 @@ public class AddressBook {
 			// name already.
 			// Since we used a hash set it'll only allow unique values to be inserted.
 			if (!addressBook.add(newContact)) {
-				System.out.println(" ERROR: A contact of this name already exists!");
+				System.out.println(" ERROR: A contact of this name already exists!\n");
 				i--;
 				continue;
 			}
+			
+			if (!cityContactMap.containsKey(newContact.getCity()))
+				cityContactMap.put(newContact.getCity(), new ArrayList<Contact>());
+			cityContactMap.get(newContact.getCity()).add(newContact);
+
+			if (!stateContactMap.containsKey(newContact.getState()))
+				stateContactMap.put(newContact.getState(), new ArrayList<Contact>());
+			stateContactMap.get(newContact.getState()).add(newContact);
 
 			System.out.println();
 		}

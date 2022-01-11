@@ -109,6 +109,23 @@ public class AddressBookHandler {
 
 	}
 
+	// Method to view all contacts in all address books in a particular city or
+	// state
+	public void viewCityState(String location, String choice) {
+		
+		addressBookRegistry.values().stream().forEach((adBook) -> {
+			adBook.addressBook.stream().filter(contact -> {
+
+				if (choice.equalsIgnoreCase("city"))
+					return contact.getCity().equalsIgnoreCase(location);
+				else
+					return contact.getState().equalsIgnoreCase(location);
+			})
+			.forEach(contact -> System.out.println(contact));
+		});
+			
+	}
+
 	// Method to search all the addressbooks for a person in the corresponding city
 	// or state
 	public void searchCityState(String name, String location, String choice) {
