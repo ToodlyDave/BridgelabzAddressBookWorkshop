@@ -2,6 +2,8 @@ package com.addressbook.services;
 
 import java.util.Scanner;
 
+import com.addressbook.utilities.FileHandler;
+
 public class AddressBookMain {
 
 	public static void main(String[] args) {
@@ -19,7 +21,7 @@ public class AddressBookMain {
 			System.out.println(" ---- MENU ----");
 			System.out.println(" 1. Add contacts\n 2. Display contacts\n 3. Edit contacts\n 4. Delete contact\n"
 					+ " 5. Add address book\n 6. Search for contact\n 7. View contacts by city or state\n"
-					+ " 8. Count contacts by city or state\n 9. Sort contacts\n 10. Exit");
+					+ " 8. Count contacts by city or state\n 9. Sort contacts\n" + " 10. File IO\n 11. Exit");
 			System.out.print("\n Please enter your choice: ");
 
 			ch = scan.next();
@@ -91,15 +93,32 @@ public class AddressBookMain {
 			case "9":
 				System.out.print(" Please enter which address book to sort: ");
 				String sortAdBook = scan.next();
-				
+
 				System.out.print(" Please enter to sort by name, city, state or zip: ");
 				String sortChoice = scan.next();
-				
+
 				adBook.sortContacts(sortAdBook, sortChoice);
 				break;
-				
-			// Exit the program
+
+			// Handles file io operations
 			case "10":
+				FileHandler file = new FileHandler();
+
+				System.out.print(" Please enter to perform read or write: ");
+				String fileOption = scan.next();
+
+				if (fileOption.equalsIgnoreCase("read") || fileOption.equalsIgnoreCase("r"))
+					file.readFromFile();
+				else {
+					System.out.print(" Please enter which address book to write: ");
+					String adBookFile = scan.next();
+
+					file.writeIntoFile(adBookFile, adBook);
+				}
+				break;
+
+			// Exit the program
+			case "11":
 				System.out.println(" Good bye!");
 				return;
 
