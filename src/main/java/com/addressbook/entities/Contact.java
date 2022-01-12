@@ -51,6 +51,14 @@ public class Contact {
 		this.state = state;
 	}
 
+	public Integer getZip() {
+		return zip;
+	}
+
+	public void setZip(int zip) {
+		this.zip = zip;
+	}
+
 	@Override
 	public String toString() {
 		return " Contact [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city

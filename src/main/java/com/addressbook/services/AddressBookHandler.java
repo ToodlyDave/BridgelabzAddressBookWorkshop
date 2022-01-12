@@ -160,14 +160,22 @@ public class AddressBookHandler {
 		System.out.println(" Total count: " + finalCount);
 	}
 
-	// Method to print out contacts sorted by name
-	public void sortContacts(String adBookName) {
+	// Method to print out contacts sorted by name, city, state or zip
+	public void sortContacts(String adBookName, String sortChoice) {
 
 		AddressBook adBook = findAddressBook(adBookName);
-		
-		adBook.addressBook.stream()
-				.sorted((contact1, contact2) -> contact1.getFirstName().compareToIgnoreCase(contact2.getFirstName()))
-				.forEach(contact -> System.out.println(contact));
+
+		adBook.addressBook.stream().sorted((contact1, contact2) -> {
+			if (sortChoice.equalsIgnoreCase("name") || sortChoice.equalsIgnoreCase("n"))
+				return contact1.getFirstName().compareToIgnoreCase(contact2.getFirstName());
+
+			else if (sortChoice.equalsIgnoreCase("city") || sortChoice.equalsIgnoreCase("c"))
+				return contact1.getCity().compareToIgnoreCase(contact2.getCity());
+			else if (sortChoice.equalsIgnoreCase("state") || sortChoice.equalsIgnoreCase("s"))
+				return contact1.getState().compareToIgnoreCase(contact2.getState());
+			else
+				return contact1.getZip().compareTo(contact2.getZip());
+		}).forEach(contact -> System.out.println(contact));
 
 	}
 
