@@ -19,7 +19,7 @@ public class AddressBookMain {
 			System.out.println(" ---- MENU ----");
 			System.out.println(" 1. Add contacts\n 2. Display contacts\n 3. Edit contacts\n 4. Delete contact\n"
 					+ " 5. Add address book\n 6. Search for contact\n 7. View contacts by city or state\n"
-					+ " 8. Count contacts by city or state\n 9. Exit");
+					+ " 8. Count contacts by city or state\n 9. Sort contacts by name\n 10. Exit");
 			System.out.print("\n Please enter your choice: ");
 
 			ch = scan.next();
@@ -63,7 +63,6 @@ public class AddressBookMain {
 				String location = scan.next();
 
 				adBook.searchCityState(name, location, choice);
-
 				break;
 
 			// View all contacts by city or state
@@ -75,7 +74,6 @@ public class AddressBookMain {
 				String viewLocation = scan.next();
 
 				adBook.viewCityState(viewLocation, viewChoice);
-
 				break;
 
 			// Count all contacts in a particular city or state
@@ -87,11 +85,17 @@ public class AddressBookMain {
 				String countLocation = scan.next();
 
 				adBook.countContact(countLocation, countChoice);
-
 				break;
 
-			// Exit the program
+			// Sort the contacts in an address book by name
 			case "9":
+				System.out.print(" Please enter which address book to sort: ");
+				String sortAdBook = scan.next();
+				
+				adBook.sortContacts(sortAdBook);
+				
+			// Exit the program
+			case "10":
 				System.out.println(" Good bye!");
 				return;
 

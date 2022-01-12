@@ -141,24 +141,34 @@ public class AddressBookHandler {
 		});
 	}
 
-	// Method to count all contacts in a given state or city across all address books
+	// Method to count all contacts in a given state or city across all address
+	// books
 	public void countContact(String location, String choice) {
-		
+
 		int finalCount = 0;
-		
+
 		for (AddressBook adBook : addressBookRegistry.values()) {
-			
-			finalCount += adBook.addressBook.stream()
-					.filter(contact -> {
-						if (choice.equalsIgnoreCase("city"))
-							return contact.getCity().equalsIgnoreCase(location);
-						else
-							return contact.getState().equalsIgnoreCase(location);
-					})
-					.count();
-		}	
-		
+
+			finalCount += adBook.addressBook.stream().filter(contact -> {
+				if (choice.equalsIgnoreCase("city"))
+					return contact.getCity().equalsIgnoreCase(location);
+				else
+					return contact.getState().equalsIgnoreCase(location);
+			}).count();
+		}
+
 		System.out.println(" Total count: " + finalCount);
+	}
+
+	// Method to print out contacts sorted by name
+	public void sortContacts(String adBookName) {
+
+		AddressBook adBook = findAddressBook(adBookName);
+		
+		adBook.addressBook.stream()
+				.sorted((contact1, contact2) -> contact1.getFirstName().compareToIgnoreCase(contact2.getFirstName()))
+				.forEach(contact -> System.out.println(contact));
+
 	}
 
 }
