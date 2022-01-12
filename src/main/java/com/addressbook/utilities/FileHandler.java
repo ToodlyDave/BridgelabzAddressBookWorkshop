@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import com.addressbook.entities.Contact;
 import com.addressbook.services.AddressBook;
 import com.addressbook.services.AddressBookHandler;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
@@ -47,7 +49,7 @@ public class FileHandler {
 	public void writeCSVFile(String adBookName, AddressBookHandler adBookHandler) {
 
 		AddressBook adBook = adBookHandler.findAddressBook(adBookName);
-		
+
 		try {
 			CSVWriter csv = new CSVWriter(new FileWriter("src/main/resources/AddressBookCSV.csv"));
 			for (Contact contact : adBook.addressBook) {
@@ -87,4 +89,38 @@ public class FileHandler {
 			e.printStackTrace();
 		}
 	}
+
+	// Method to write address book into json file
+	public void writeJSONFile(String adBookName, AddressBookHandler adBookHandler) {
+
+		AddressBook adBook = adBookHandler.findAddressBook(adBookName);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String output = gson.toJson(adBook.addressBook);
+
+		try {
+			FileWriter fw = new FileWriter("src/main/resources/AddressBookJSON.json");
+			fw.write(output);
+			fw.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	// Method to read address book data from json file
+	public void readJSONFile() {
+
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		try {
+			FileReader fr = new FileReader("src/main/resources/AddressBookJSON.json");
+
+			System.out.println(gson.fromJson(fr, Object.class));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
